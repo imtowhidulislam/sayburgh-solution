@@ -119,26 +119,27 @@
           id: new Date().getTime().toString()
         }
         this.Employee = [...this.Employee, newEmployee],
+        this.$emit('MyEmployee', newEmployee)
         this.name = "",
         this.email = "",
         this.phone = ""
-        this.$emit('MyEmployee', this.Employee)
       },
       
     },
-    mounted(){
+   /*  mounted(){
       console.log('App Mounted');
         if (localStorage.getItem('EmployeeData'))
             this.Employee = JSON.parse(localStorage.getItem('EmployeeData'));
     },
-    watch:{
+   */
+   watch:{
       Employee:{
         handler(){
           localStorage.setItem('EmployeeData', JSON.stringify(this.Employee))
         },
         deep:true
       }
-    }
+    } 
   }
   </script>
   <style scoped> 
