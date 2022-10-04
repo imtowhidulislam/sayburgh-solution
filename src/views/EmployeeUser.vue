@@ -1,9 +1,10 @@
 <template>
     <div>
-        <h2>This is Employee Page</h2>
-        <EmployeeForm @MyEmployee="getEmployee($data)"/>
-
-        <v-container class="my-12" >
+    <div class="my-12">
+        <EmployeeForm @MyEmployee="getEmployee($data)" :mutateData="updateEmployee"/>
+        <h2 class="text-center mt-8">Our Employees</h2>
+        <v-container grid-list-md
+>
             <v-layout
                 row
                 wrap
@@ -65,24 +66,28 @@
                 </v-flex>
             </v-layout>
         </v-container>
-
     </div>
+    <Footer />
+</div>
+
 </template>
-<!-- <div v-for="em in Employee" :key="em.phone">
-    <h2>{{em.name}}</h2>
-    <h2>{{em.email}}</h2>
-    <h2>{{em.phone}}</h2>
-  </div> -->
+
 <script>
     import EmployeeForm from "@/components/EmployeeForm.vue";
+    import Footer from '@/components/Footer.vue';
     export default {
         components : {
-            EmployeeForm
-        },
+    EmployeeForm,
+    Footer
+},
         data() {
             return {
                 ourEmployee :[],
-                // console.log(ourEmployee)
+                updateEmployee : {
+                    name : "",
+                    email: "",
+                    phone: ""
+                }
             }
         },
         methods: {
@@ -91,20 +96,25 @@
                 console.log(ourEmployee);
             },
             remove(id) {
-                console.log(id);
                 const filterEmp = this.ourEmployee.filter(em => {
                     return em.id !== id
                 })
                 this.ourEmployee = filterEmp
-                localStorage.removeItem("EmployeeData")
+                // localStorage.removeItem("EmployeeData")
                 console.log(filterEmp);
             },
-            edit(id) {
-                console.log(id);
+            edit(ids) {
+                const [...b] = this.ourEmployee.filter(fi => {
+                    const a = fi.id === ids;
+                    return a
+                })
+                const {name, id , email, phone} = b[0]
+                this.updateEmployee.name = name
+                this.updateEmployee.email = email 
+                this.updateEmployee.phone = phone
             }
         }
         , mounted(){
-                console.log('App Mounted');
                 if (localStorage.getItem('EmployeeData'))
                 this.ourEmployee = JSON.parse(localStorage.getItem('EmployeeData'));
         }
