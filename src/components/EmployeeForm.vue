@@ -53,14 +53,15 @@
   </template>
 
   <script>
-    import { validationMixin } from 'vuelidate'
+  import { validationMixin } from 'vuelidate'
   import { required, maxLength, email } from 'vuelidate/lib/validators'
 
   export default {
+    name: "EmployeeForm",
     mixins: [validationMixin],
 
     validations: {
-      name: { required, maxLength: maxLength(10) },
+      name: { required, maxLength: maxLength(20) },
       email: { required, email },
       select: { required },
       /* checkbox: {
@@ -69,7 +70,9 @@
         },
       }, */
     },
-
+props : {
+  // mutateData
+},
     data: () => ({
       name: '',
       email: '',

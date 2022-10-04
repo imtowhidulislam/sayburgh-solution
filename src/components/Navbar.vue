@@ -25,6 +25,8 @@
     data(){
       return {
         links: [
+          // {icon: 'mdi-employee', text: "emp form", route: ""},
+          // {icon: 'mdi-account-lock-open', text: "admin form", route: ""},
           {icon: 'mdi-account', text: "Employee", route: "/"},
           {icon: 'mdi-account-lock-open', text: "Admin", route: "/admin"}
         ]
